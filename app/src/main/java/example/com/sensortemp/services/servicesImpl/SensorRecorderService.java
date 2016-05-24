@@ -1,17 +1,19 @@
-package example.com.sensortemp.services;
+package example.com.sensortemp.services.servicesImpl;
 
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import example.com.sensortemp.MainActivity;
 import example.com.sensortemp.R;
+import example.com.sensortemp.sensorRecorder.impl.AccelerometerRecorder;
+import example.com.sensortemp.services.ServiceObservable;
 
-public class SensorRecorderService extends Service{
+public class SensorRecorderService extends ServiceObservable {
 
     private boolean isPlaying = false;
     Context mContext;
@@ -35,7 +37,12 @@ public class SensorRecorderService extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         createNotification();
+        attachSensorRecorders();
         return START_NOT_STICKY;
+    }
+
+    private void attachSensorRecorders() {
+        attach(new AccelerometerRecorder(mContext));
     }
 
     private void createNotification() {
@@ -65,6 +72,7 @@ public class SensorRecorderService extends Service{
     }
 
     private void stop() {
-
+        Log.wtf("here", "--------------------------------------------");
+        notifyAllObservers();
     }
 }
