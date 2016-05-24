@@ -24,7 +24,7 @@ public class AccelerometerRecorder extends Service implements SensorEventListene
     private boolean isPlaying = false;
 
     private SensorManager senSensorManager;
-    private Sensor senAccelerometer;
+    private Sensor senAccelerometer = null;
     Context mContext = null;
 
     public AccelerometerRecorder() {
