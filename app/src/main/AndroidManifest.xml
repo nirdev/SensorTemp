@@ -19,11 +19,11 @@
         </activity>
 
         <service
-            android:name=".AccelerometerRecorder"
+            android:name=".sensorRecorder.AccelerometerRecorder"
             android:process=":sensorRecorder"
             android:exported="false"/>
         <service
-            android:name=".SensorRecorderService"
+            android:name=".services.SensorRecorderService"
             android:process=":sensorRecorder"
             android:enabled="true"
             android:exported="true"/>
