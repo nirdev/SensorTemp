@@ -19,7 +19,6 @@ public abstract class BaseSensorRecorder extends ServiceObserver implements Sens
     protected BaseSensorRecorder(Context context) {
         this.context = context;
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        sensorManager.unregisterListener(this);
         onServiceStart(sensorManager);
     }
 
@@ -28,9 +27,15 @@ public abstract class BaseSensorRecorder extends ServiceObserver implements Sens
      */
     public abstract void onServiceStart(SensorManager sensorManager);
 
+    /**
+     * get sensor events here - for specific sensor data {@link SensorEvent}
+     */
     @Override
     public abstract void onSensorChanged(SensorEvent event);
 
+    /**
+     * unregister client's desired listener (@nullable)
+     */
     @Override
     public void onServiceStop(){
         sensorManager.unregisterListener(this);
